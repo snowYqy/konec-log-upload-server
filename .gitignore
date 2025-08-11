@@ -1,0 +1,8 @@
+# 忽略 node_modules 文件夹
+node_modules/
+
+# 可选：同时忽略其他无需提交的文件
+.env          # 环境变量配置
+.DS_Store     # macOS 系统文件
+dist/         # 构建输出目录（如适用）
+*.log         # 日志文件
