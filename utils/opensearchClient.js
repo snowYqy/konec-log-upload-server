@@ -1,6 +1,7 @@
 /**
  * AWS OpenSearch 客户端
  * 处理安全认证和数据上传
+ * 文档：https://docs.opensearch.org/latest/getting-started/search-data/
  */
 
 const AWS = require("aws-sdk");
@@ -96,21 +97,26 @@ async function sendToOpenSearch(data) {
       },
       mappings: {
         properties: {
-          timestamp: {
-            type: "date",
-            format: "strict_date_optional_time||epoch_millis",
-          },
-          // message: {
-          //   type: "text",
-          //   fields: { keyword: { type: "keyword", ignore_above: 256 } },
-          // },
-          level: { type: "keyword" },
-          source: { type: "keyword" },
-          homeId: { type: "keyword" },
           "@timestamp": {
             type: "date",
             format: "strict_date_optional_time||epoch_millis",
           },
+          account: { type: "keyword" },
+          level: { type: "keyword" },
+          eventName: {
+            type: "keyword",
+            fields: {
+              text: { type: "text" },
+            },
+          },
+          uid: { type: "keyword" },
+          homeId: { type: "keyword" },
+          devId: { type: "keyword" },
+          appVersion: { type: "keyword" },
+          apiName: { type: "keyword" },
+          pageId: { type: "keyword" },
+          platform: { type: "keyword" },
+          debugMode: { type: "keyword" },
         },
       },
     };
@@ -122,8 +128,9 @@ async function sendToOpenSearch(data) {
       body.push({ index: { _index: indexName } });
       body.push({
         ...item,
-        // "@timestamp": item.timestamp ? new Date(Number(item.timestamp)).toISOString() : new Date().toISOString(),
-        // upload_timestamp: new Date().toISOString()
+        "@timestamp": item.timestamp
+          ? new Date(Number(item.timestamp)).toISOString()
+          : new Date().toISOString(),
       });
     }
     if (!body.length) throw new Error("bulk body cannot be empty");
