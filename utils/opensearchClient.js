@@ -93,11 +93,11 @@ async function sendToOpenSearch(data) {
       settings: {
         number_of_shards: 1,
         number_of_replicas: 1,
-        "index.mapping.total_fields.limit": 2000,
+        "index.mapping.total_fields.limit": 1000,
       },
       mappings: {
         properties: {
-          "@timestamp": {
+          timestamp: {
             type: "date",
             format: "strict_date_optional_time||epoch_millis",
           },
@@ -109,14 +109,17 @@ async function sendToOpenSearch(data) {
               text: { type: "text" },
             },
           },
-          uid: { type: "keyword" },
+          userId: { type: "keyword" },
           homeId: { type: "keyword" },
           devId: { type: "keyword" },
           appVersion: { type: "keyword" },
           apiName: { type: "keyword" },
           pageId: { type: "keyword" },
-          platform: { type: "keyword" },
+          deviceModel: { type: "keyword" },
           debugMode: { type: "keyword" },
+          message: { type: "text" },
+          stack: { type: "text" },
+          error: { type: "text" },
         },
       },
     };

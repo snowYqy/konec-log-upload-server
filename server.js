@@ -16,9 +16,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 创建临时上传目录
-const uploadPath = process.env.UPLOAD_PATH || "./temps";
-if (!fs.existsSync(uploadPath)) {
-  fs.mkdirSync(uploadPath, { recursive: true });
+const tempUploadPath = process.env.UPLOAD_PATH || "./temps";
+if (!fs.existsSync(tempUploadPath)) {
+  fs.mkdirSync(tempUploadPath, { recursive: true });
 }
 
 // 路由

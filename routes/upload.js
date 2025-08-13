@@ -16,7 +16,7 @@ const gunzip = promisify(zlib.gunzip);
 // 配置 multer 用于文件上传
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadPath = process.env.UPLOAD_PATH || "./uploads";
+    const uploadPath = process.env.UPLOAD_PATH || "./temps";
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
@@ -49,7 +49,7 @@ const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
   limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE) || 30 * 1024 * 1024, // 默认30MB
+    fileSize: parseInt(process.env.MAX_FILE_SIZE) || 50 * 1024 * 1024, // 默认50MB
   },
 });
 
