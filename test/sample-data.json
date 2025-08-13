@@ -1,0 +1,26 @@
+[
+  {
+    "timestamp": "2025-08-08T01:30:00Z",
+    "message": "应用启动成功",
+    "level": "INFO",
+    "source": "application"
+  },
+  {
+    "timestamp": "2025-08-08T01:33:00Z",
+    "message": "数据库连接建立",
+    "level": "INFO",
+    "source": "database"
+  },
+  {
+    "timestamp": "2025-08-08T02:32:00Z",
+    "message": "用户登录失败",
+    "level": "ERROR",
+    "source": "auth"
+  },
+  {
+    "timestamp": "2025-08-08T02:33:00Z",
+    "message": "缓存更新完成",
+    "level": "DEBUG",
+    "source": "cache"
+  }
+] 
